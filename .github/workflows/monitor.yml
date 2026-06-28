@@ -20,4 +20,5 @@ jobs:
 
       - run: python monitor.py
         env:
+          GOOGLE_FORM_URL: ${{ secrets.GOOGLE_FORM_URL }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
