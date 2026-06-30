@@ -1,9 +1,14 @@
 import requests
 import os
 import sys
+import urllib.parse
 
 GOOGLE_FORM_URL = os.getenv("GOOGLE_FORM_URL")
 webhook = os.getenv("DISCORD_WEBHOOK")
+
+workflow_file = "monitor.yml"
+repo = os.getenv("GITHUB_REPOSITORY")
+token = os.getenv("GITHUB_TOKEN")
 
 response = requests.get(GOOGLE_FORM_URL, timeout=15)
 
@@ -22,3 +27,14 @@ requests.post(
   json={"content": f"Google Form is OPEN!\n{GOOGLE_FORM_URL}"},
   timeout=15,
 )
+
+requests.put(
+    f"https://api.github.com/repos/{repo}/actions/workflows/{workflow_file}/disable",
+    headers={
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json",
+    },
+    timeout=15,
+)
+
+print("Workflow disabled.")

@@ -22,3 +22,6 @@ jobs:
         env:
           GOOGLE_FORM_URL: ${{ secrets.GOOGLE_FORM_URL }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_WORKFLOW: ${{ github.workflow }}
